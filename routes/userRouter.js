@@ -13,8 +13,6 @@ router.put("/usuario", editUser);
 
 router.delete("/usuario", deleteUser)
 
-router.get("*", (req, res) => {
-  res.send("404 - page not found");
-});
+
 
 export default router;
