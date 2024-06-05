@@ -1,4 +1,4 @@
-import { addUserQueries, getUsersQueries } from "../models/userModel.js"
+import { addUserQueries, getUsersQueries, editUserQueries } from "../models/userModel.js"
 import path from "path";
 const __dirname = path.resolve();
 
@@ -25,6 +25,18 @@ export const getUsers = async (req, res) => {
         res.status(200).send(users);
     } catch (error) {
         res.status(500).send("Error al obtener usuarios");
+    }
+};
+
+export const editUser = async (req, res) => {
+    const { id } = req.query
+    const { name, balance } = req.body;
+    const datos = [name, balance, id];
+    try {
+        const user = await editUserQueries(datos);
+        res.status(200).send(user);
+    } catch (error) {
+        res.status(500).send("Error al editar usuario");
     }
 };
 

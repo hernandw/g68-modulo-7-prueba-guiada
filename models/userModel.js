@@ -35,3 +35,21 @@ export const getUsersQueries = async () => {
         console.log("Queries Error Code: ", error.code, "Message: ", error.message);
     }
 }
+
+export const editUserQueries = async (datos) => {
+    try {
+      const query = {
+    text: 'UPDATE usuarios SET nombre = $1, balance = $2 WHERE id = $3',
+    values: datos,
+  }
+    const response = await pool.query(query)
+    if (response.rowCount > 0) {
+      return response.rows[0]
+    } else {
+      return new Error('Error editar Usuario')
+    }
+  }
+  catch (error) {
+    console.log(error.message)
+  }
+}
